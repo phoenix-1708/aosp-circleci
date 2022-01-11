@@ -14,8 +14,9 @@ jobs:
            apt install sudo
            apt install time
            apt install rclone
-           #git clone https://github.com/akhilnarang/scripts bscripts && cd bscripts && bash setup/android_build_env.sh && cd ..
+           git clone https://github.com/akhilnarang/scripts bscripts && cd bscripts && bash setup/android_build_env.sh && cd ..
            mkdir -p ~/.config/rclone
+           echo "directroy created"
            printf "[remote]\ntype = drive\nscope = drive\ntoken = {"access_token":"ya29.a0ARrdaM-31yElVZUy3zSe-8HO6FRDSqLnZIX9FPPb0rvogJ2tdWHDN1tcahG_jKCW_mmFEdmMtp1cZFwd-hmXeINfXBL65o7zdWhzlegKudHzQled6Reui6ikzd3E0KNEXyvEBBZY7mF4uUFMZkTGHngMDe3L","token_type":"Bearer","refresh_token":"1//0gA-CKsbHffjLCgYIARAAGBASNwF-L9IrQC8B1I7eJI0D96zFIgJpHW75juaf5D1fTOjR_5DFcT2X89bpJyurhQwZqBfUojOb5aA","expiry":"2021-10-23T22:46:21.231221878+05:30"}\nclient_id = 9495530072-2kceoeg3tb8tjt8n2k20vqgatsd6gt7d.apps.googleusercontent.com\nclient_secret = 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" > ~/.config/rclone/rclone.conf
            DEBIAN_FRONTEND=noninteractive
            sudo apt install python3 -y
@@ -24,6 +25,7 @@ jobs:
            git config --global user.email "harikumar1708@gmail.com"
            git config --global color.ui true
            mkdir -p /tmp/ccache
+           echo "ccache directory created"
            rclone copy remote:ccache/ci2/ccache.tar.gz /tmp -P
            cd /tmp
            sudo time tar xf ccache.tar.gz
