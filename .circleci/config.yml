@@ -26,9 +26,9 @@ jobs:
            git config --global user.email "harikumar1708@gmail.com"
            git config --global color.ui true
            mkdir -p /tmp/ccache
-           rclone copy remote:ccache/ci2/ccache.tar.gz /tmp -P
+           sudo rclone copy remote:ccache/ci2/ccache.tar.gz /tmp -P
            cd /tmp
-           time tar xf ccache.tar.gz
+           sudo time tar xf ccache.tar.gz
            cd /tmp
            echo "============================"
            echo "Syncing The Sources..."
@@ -63,7 +63,7 @@ jobs:
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/sweet/ && ls *.zip) Completed!"
            echo "Uploading the Build...."
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd /tmp/rom/out/target/product/sweet/ && ls *.zip)"
-           rclone copy /tmp/rom/out/target/product/laurel_sprout/*.zip remote:sweet -P
+           sudo rclone copy /tmp/rom/out/target/product/laurel_sprout/*.zip remote:sweet -P
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd /tmp/rom/out/target/product/sweet/ && ls *.zip) Uploaded Successfully!"
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Download link https://withered-lab-e844.harikumar1708.workers.dev/sweet/$(cd /tmp/rom/out/target/product/sweet/ && ls *.zip)"
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
@@ -71,7 +71,7 @@ jobs:
            bash ziping.sh
            cd /tmp
            curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-           rclone copy ccache.tar.gz remote:ccache/ci2 -P
+           sudo rclone copy ccache.tar.gz remote:ccache/ci2 -P
            echo "Build Uploaded Successfully!"
            
            
