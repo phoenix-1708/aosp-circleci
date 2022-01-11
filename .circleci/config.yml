@@ -12,6 +12,9 @@ jobs:
            export DEBIAN_FRONTEND=noninteractive
            apt update
            apt install sudo
+           apt install time
+           apt install rclone
+           git clone https://github.com/akhilnarang/scripts bscripts && cd bscripts && bash setup/android_build_env.sh && cd ..
            mkdir -p ~/.config/rclone
            echo "[remote]
                  type = drive
