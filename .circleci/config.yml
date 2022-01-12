@@ -24,10 +24,6 @@ jobs:
            git config --global user.name "phoenix-1708"
            git config --global user.email "harikumar1708@gmail.com"
            git config --global color.ui true
-           sudo fallocate -l 20G /swapfile
-           sudo chmod 600 /swapfile
-           sudo mkswap /swapfile
-           sudo swapon /swapfile
            mkdir -p ~/tmp/ccache
            echo "ccache directory created"
            #rclone copy remote:ccache/ci2/ccache.tar.gz ~/tmp -P
