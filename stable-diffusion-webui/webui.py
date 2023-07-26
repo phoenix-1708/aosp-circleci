@@ -359,7 +359,8 @@ def create_api(app):
     from modules.api.api import Api
     api = Api(app, queue_lock)
     return api
-
+    
+from pyngrok import ngrok
 def api_only():
     initialize()
 
