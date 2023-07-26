@@ -360,7 +360,30 @@ def create_api(app):
     api = Api(app, queue_lock)
     return api
 
+def api_only():
+    initialize()
 
+    # Create a ngrok tunnel to forward requests to the specified local address and port
+    ngrok_tunnel = ngrok.connect("http://127.0.0.1:7861")
+
+    try:
+        ngrok_url = ngrok_tunnel.public_url
+        print(f"ngrok URL: {ngrok_url}")
+
+        app = FastAPI()
+        setup_middleware(app)
+        api = create_api(app)
+
+        modules.script_callbacks.app_started_callback(None, app)
+
+        print(f"Startup time: {startup_timer.summary()}.")
+        api.launch(
+        server_name="0.0.0.0" if cmd_opts.listen else "127.0.0.1",
+        port=cmd_opts.port if cmd_opts.port else 7861,
+        root_path=f"/{cmd_opts.subpath}" if cmd_opts.subpath else "")
+    except KeyboardInterrupt:
+        print("Stopping ngrok...")
+        ngrok.kill()
 def api_only():
     initialize()
 
